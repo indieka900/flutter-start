@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.brown,
       ),
       debugShowCheckedModeBanner: false,
-      home: const MyHomePage(title: 'Flutter Demo By Joseph'),
+      home: const Appext(tittle: 'Flutter Demo By Joseph'),
     );
   }
 }
@@ -33,6 +33,24 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  @override
+  Widget build(BuildContext context) {
+    return const Appext(
+      tittle: "Our Next page",
+    );
+  }
+}
+
+class Appext extends StatefulWidget {
+  const Appext({super.key, required this.tittle});
+
+  final String tittle;
+
+  @override
+  State<Appext> createState() => _AppextState();
+}
+
+class _AppextState extends State<Appext> {
   int _counter = 0, currentindex = 0;
   var intVa = 1, intVar = 0;
 
@@ -53,44 +71,57 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(widget.tittle),
       ),
       body: Center(
-        child: Container(
-          width: double.infinity,
-          height: double.infinity,
-          color: Colors.grey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              const Text(
-                'You\'ve pressed the increase button \u{1F493} this many times:',
-              ),
-              Text(
-                '$_counter \u{1F496} \u{1F970}',
-                style: Theme.of(context).textTheme.headline3,
-              ),
-              const Text(
-                "For the fisrt created an App that ran succesfully",
-              ),
-              Text(
-                "The random numbers generated is $intVa",
-              ),
-              Text(
-                "The Sum of the random numbers generated  is $intVar",
-              ),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    onPrimary: Colors.blue,
-                    primary: Colors.black87,
-                    shadowColor: Colors.deepOrange),
-                onPressed: _incrementCounter,
-                child: const Text("Increase"),
-              ),
-            ],
-          ),
-        ),
+        child: currentindex == 0
+            ? Container(
+                width: double.infinity,
+                height: double.infinity,
+                color: Colors.grey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    const Text(
+                      'You\'ve pressed the increase button \u{1F493} this many times:',
+                    ),
+                    Text(
+                      '$_counter \u{1F496} \u{1F970}',
+                      style: Theme.of(context).textTheme.headline3,
+                    ),
+                    const Text(
+                      "For the fisrt created an App that ran succesfully",
+                    ),
+                    Text(
+                      "The random numbers generated is $intVa",
+                    ),
+                    Text(
+                      "The Sum of the random numbers generated  is $intVar",
+                    ),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          onPrimary: Colors.blue,
+                          primary: Colors.black87,
+                          shadowColor: Colors.deepOrange),
+                      onPressed: _incrementCounter,
+                      child: const Text("Increase"),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (BuildContext context) =>
+                                const SecondPage(),
+                          ),
+                        );
+                      },
+                      child: const Text("Next Page"),
+                    ),
+                  ],
+                ),
+              )
+            : Image.asset('images/used.jpg'),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: generate,
@@ -134,6 +165,19 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Colors.white24,
         unselectedItemColor: Colors.deepPurple,
       ),
+    );
+  }
+}
+
+class SecondPage extends StatelessWidget {
+  const SecondPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+          //title: Text(widget.title),
+          ),
     );
   }
 }
