@@ -53,6 +53,7 @@ class Appext extends StatefulWidget {
 class _AppextState extends State<Appext> {
   int _counter = 0, currentindex = 0;
   var intVa = 1, intVar = 0;
+  bool _isClicked = false;
 
   void _incrementCounter() {
     setState(() {
@@ -121,7 +122,16 @@ class _AppextState extends State<Appext> {
                   ],
                 ),
               )
-            : Image.asset('images/used.jpg'),
+            : GestureDetector(
+                onTap: () {
+                  setState(() {
+                    _isClicked = !_isClicked;
+                  });
+                },
+                child: _isClicked
+                    ? Image.asset('images/used.jpg')
+                    : Image.asset('images/joss.jpg'),
+              ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: generate,
